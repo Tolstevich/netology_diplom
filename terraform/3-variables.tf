@@ -5,12 +5,12 @@ variable "network" {
 
 variable "cloud_id" {
     type    = string
-    default = "b1gj5tmhc48vdc0d8hsp" 
+    default = "*****" 
 }
 
 variable "folder_id" {
     type    = string
-    default = "b1g1j9ddbb0pvnfkf25u" 
+    default = "*****" 
 }
 variable "zone_a" {
     type    = string
