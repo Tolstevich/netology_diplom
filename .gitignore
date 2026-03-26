@@ -21,4 +21,3 @@ cloud-init.yml
 ansible.log
 *.vault
 .vault_pass
-hosts.ini
