@@ -30,7 +30,6 @@ resource "yandex_compute_instance" "bastion" {
         user-data          = file("./cloud-init.yml")
         serial_port_enable = 1
     }
-    scheduling_policy { preemptible = true }
 }
 # ВМ с nginx-01
 resource "yandex_compute_instance" "web_01" {
@@ -60,7 +59,6 @@ resource "yandex_compute_instance" "web_01" {
         user-data          = file("./cloud-init.yml")
         serial_port_enable = 1
     }
-    scheduling_policy { preemptible = true }
 }
 #ВМ с nginx-02
 resource "yandex_compute_instance" "web_02" {
@@ -90,7 +88,6 @@ resource "yandex_compute_instance" "web_02" {
         user-data          = file("./cloud-init.yml")
         serial_port_enable = 1
     }
-    scheduling_policy { preemptible = true }
 }
 #Заббикс сервер
 resource "yandex_compute_instance" "zabbix" {
@@ -120,7 +117,6 @@ resource "yandex_compute_instance" "zabbix" {
         user-data          = file("./cloud-init.yml")
         serial_port_enable = 1
     }
-    scheduling_policy { preemptible = true }
 }
 # Эластик
 resource "yandex_compute_instance" "elasticsearch" {
@@ -150,7 +146,6 @@ resource "yandex_compute_instance" "elasticsearch" {
         user-data          = file("./cloud-init.yml")
         serial_port_enable = 1
     }
-    scheduling_policy { preemptible = true }
 }
 # Кибана
 resource "yandex_compute_instance" "kibana" {
@@ -180,7 +175,6 @@ resource "yandex_compute_instance" "kibana" {
         user-data          = file("./cloud-init.yml")
         serial_port_enable = 1
     }
-    scheduling_policy { preemptible = true }
 }
 #Создаю инвентори файл для ансибл. Задаю группы и переменные для выполнения ансиблом
 resource "local_file" "inventory" {
