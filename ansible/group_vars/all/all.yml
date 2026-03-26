@@ -10,7 +10,6 @@ zabbix_server_manage_database: false
 zabbix_server_database_sqlload: false
 
 # PostgreSQL
-zabbix_server_pgsql_login_user: "postgres"
 zabbix_server_pgsql_login_unix_socket: "/var/run/postgresql"
 
 # Zabbix Agent
