@@ -22,6 +22,10 @@
 
    Установку всего необходимого ПО через ансибл я разбил, естетственно, на роли. Заббикс устанавливается с помощью коллекции, которую я нашел в открытом доступе. 
 
+   Запуск и работа ансибл
+
+   ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/ansiblework.png)
+
    ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/ansible.png)
 
 ### zabbix
