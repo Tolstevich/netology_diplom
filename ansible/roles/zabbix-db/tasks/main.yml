@@ -1,0 +1,117 @@
+---
+- name: psycopg2 for PostgreSQL
+  apt:
+    name: python3-psycopg2
+    state: present
+    update_cache: yes
+
+- name: add Zabbix repository
+  shell: |
+    wget -q https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-1+ubuntu24.04_all.deb -O /tmp/zabbix-release.deb
+    dpkg -i /tmp/zabbix-release.deb
+    apt update
+  args:
+    creates: /etc/apt/sources.list.d/zabbix.list
+
+- name: install postgreSQL and zabbix scripts
+  apt:
+    name:
+      - postgresql
+      - postgresql-contrib
+      - zabbix-sql-scripts
+    state: present
+    update_cache: yes
+
+- name: start postgreSQL
+  systemd:
+    name: postgresql
+    state: started
+    enabled: yes
+
+- name: zhdem postgres
+  wait_for:
+    port: 5432
+    host: localhost
+    timeout: 30
+
+- name: pg_hba for zabbix user, potomushto on nifiga bez nevo ne rabotaet
+  blockinfile:
+    path: /etc/postgresql/16/main/pg_hba.conf
+    insertbefore: '^local\s+all\s+all'
+    block: |
+      local   all             zabbix                                  md5
+      host    all             zabbix          127.0.0.1/32            md5
+      host    all             zabbix          ::1/128                 md5
+  notify: reload postgresql
+
+- name: create user zabbix
+  become_user: postgres
+  postgresql_user:
+    name: zabbix
+    password: "zabbix"
+    role_attr_flags: LOGIN,CREATEDB
+    state: present
+
+- name: create zabbix database
+  become_user: postgres
+  postgresql_db:
+    name: zabbix
+    owner: zabbix
+    state: present
+
+- name: prava dlya zabbix user
+  become_user: postgres
+  postgresql_privs:
+    db: zabbix
+    privs: ALL
+    type: database
+    role: zabbix
+    state: present
+
+- name: schema prava to zabbix
+  become_user: postgres
+  postgresql_schema:
+    name: public
+    database: zabbix
+    owner: zabbix
+    state: present
+
+- name: import zabbix schema
+  shell: |
+     zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | PGPASSWORD='zabbix' psql -U zabbix -d zabbix -h 127.0.0.1
+  register: import_result
+  failed_when: import_result.rc != 0
+
+- name: ozhidaem shemu
+  pause:
+    seconds: 30
+
+- name: verify tabls
+  become_user: postgres
+  shell: psql -d zabbix -c "\dt" | grep -c "users"
+  register: tables_check
+  until: tables_check.stdout | int > 0
+  retries: 10
+  delay: 10
+  failed_when: tables_check.stdout | int == 0
+
+- name: instal php for web
+  apt:
+    name:
+      - php8.3
+      - php8.3-fpm
+      - php8.3-pgsql
+      - php8.3-ldap
+      - php8.3-gd
+      - php8.3-mbstring
+      - php8.3-xml
+      - php8.3-bcmath
+      - php8.3-curl
+    state: present
+    update_cache: yes
+
+- name: start php
+  systemd:
+    name: php8.3-fpm
+    state: started
+    enabled: yes

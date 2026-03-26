@@ -1,0 +1,28 @@
+---
+- name: vse takze zerkalo yandexa add
+  shell: |
+    echo "deb [trusted=yes] https://mirror.yandex.ru/mirrors/elastic/8/ stable main" | tee /etc/apt/sources.list.d/elastic-8.x.list
+    apt update
+  args:
+    creates: /etc/apt/sources.list.d/elastic-8.x.list
+
+- name: install filebeat
+  apt:
+    name: filebeat
+    state: present
+    update_cache: yes
+
+- name: configure Filebeat
+  template:
+    src: filebeat.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart filebeat
+
+- name: push and enable Filebeat
+  systemd:
+    name: filebeat
+    state: started
+    enabled: yes

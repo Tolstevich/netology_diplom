@@ -1,0 +1,9 @@
+cluster.name: diploma-cluster
+node.name: {{ ansible_hostname }}
+network.host: 0.0.0.0
+discovery.type: single-node
+xpack.security.enabled: false
+xpack.security.transport.ssl.enabled: false
+xpack.security.http.ssl.enabled: false
+path.logs: /var/log/elasticsearch
+path.data: /var/lib/elasticsearch

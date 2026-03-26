@@ -1,0 +1,60 @@
+---
+- name: snova zerkalo add (Yandex mirror)
+  shell: |
+    echo "deb [trusted=yes] https://mirror.yandex.ru/mirrors/elastic/8/ stable main" | tee /etc/apt/sources.list.d/elastic-8.x.list
+    apt update
+  args:
+    creates: /etc/apt/sources.list.d/elastic-8.x.list
+
+- name: install kibana
+  apt:
+    name: kibana
+    state: present
+    update_cache: yes
+
+- name: cnfigure Kibana
+  template:
+    src: kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart kibana
+
+- name: log directory
+  file:
+    path: /var/log/kibana
+    state: directory
+    owner: kibana
+    group: kibana
+    mode: '0755'
+
+- name: start and zapusk kibana
+  systemd:
+    name: kibana
+    state: started
+    enabled: yes
+
+- name: Wait to be ready
+  uri:
+    url: "http://localhost:5601/api/status"
+    status_code: 200
+  register: result
+  until: result.status == 200
+  retries: 60
+  delay: 10
+
+- name: index pattern create
+  uri:
+    url: "http://localhost:5601/api/saved_objects/index-pattern"
+    method: POST
+    headers:
+      kbn-xsrf: "true"
+    body_format: json
+    body:
+      attributes:
+        title: "nginx-logs-*"
+        timeFieldName: "@timestamp"
+    status_code: 200
+  register: index_pattern
+  failed_when: index_pattern.status != 200

@@ -1,0 +1,23 @@
+---
+- name: set zabbix server to localhost
+  replace:
+    path: /etc/zabbix/web/zabbix.conf.php
+    regexp: "\\$ZBX_SERVER\\s*=\\s*'.*';"
+    replace: "$ZBX_SERVER = 'localhost';"
+
+- name: server name
+  replace:
+    path: /etc/zabbix/web/zabbix.conf.php
+    regexp: "\\$ZBX_SERVER_NAME\\s*=\\s*'.*';"
+    replace: "$ZBX_SERVER_NAME = 'Zabbix Server';"
+
+- name: mod rewrite
+  command: a2enmod rewrite
+  notify: restart apache2
+
+- name: redirect bez start apache
+  lineinfile:
+    path: /etc/apache2/sites-available/000-default.conf
+    insertafter: '<VirtualHost \*:80>'
+    line: '    RedirectMatch ^/$ /zabbix'
+  notify: restart apache2

@@ -1,0 +1,25 @@
+#cloud-config
+users:
+  - name: tolstevich
+    groups: sudo
+    home: /home/tolstevich
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEyUI6RGKTWwyrKCdANBEa1EvrVO0CTVZou0+92weD44 yandex
+
+  - name: ansible
+    groups: sudo
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEyUI6RGKTWwyrKCdANBEa1EvrVO0CTVZou0+92weD44 yandex
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - python3
+  - python3-pip
+  - python3-venv
+  - acl

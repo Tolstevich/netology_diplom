@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Приветик</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Дипломный проект by Ганопольский Евгений</h1>
+<p>Здесь видно работу балансировщика при обновлении страницы</p>
+
+<p><strong>Имя сервера:</strong> {{ ansible_hostname }}<br>
+<strong>Внутренний IP:</strong> {{ ansible_default_ipv4.address }}</p>
+
+
+<p><em>Спасибо за внимание</em></p>
+</body>
+</html>
