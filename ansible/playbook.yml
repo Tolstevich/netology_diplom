@@ -32,7 +32,7 @@
     - role: community.zabbix.zabbix_web
     - role: zabbix-web-config
 
-- name: Install Zabbix Agent on all hosts
+- name: install zabbix agent 
   hosts: all
   become: yes
   roles:
