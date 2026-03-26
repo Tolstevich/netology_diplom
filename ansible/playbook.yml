@@ -1,29 +1,29 @@
 ---
-- name: Install nginx webservers
+- name: install nginx webservers
   hosts: webservers
   become: yes
   roles:
     - nginx
 
-- name: Install Elasticsearch
+- name: install elasticsearch
   hosts: elasticsearch
   become: yes
   roles:
     - role: elasticsearch
 
-- name: Install Filebeat on web servers
+- name: install filebeat web servers
   hosts: webservers
   become: yes
   roles:
     - role: filebeat
 
-- name: Install Kibana
+- name: install kibana
   hosts: kibana
   become: yes
   roles:
     - role: kibana
 
-- name: Setup PostgreSQL for Zabbix
+- name: postgres for zabbix
   hosts: zabbix
   become: yes
   roles:
