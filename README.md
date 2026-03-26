@@ -24,9 +24,30 @@
 
    ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/ansible.png)
 
+### zabbix
+
    Тут видно настроенные дашборды для заббикса. ЦПУ, диски, память и т.д.
 
-   https://github.com/Tolstevich/netology_diplom/blob/master/img/zabbix_dash.png
+   ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/zabbix_dash.png)
+
+   Здесь видно подключенные агенты на всех серверах.
+   ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/vmonzabbix.png)
+
+### logs
+
+   Эластик, файлбит и кибана были настроены, логи с веб-серверов собираются
+
+   ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/logi.png)
+   
+### load_balancer
+
+   Балансировщик работает корректно, запросы перебрасывает между двух веб-серверов
+
+   ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/balancer.png)
+   
+   ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/balancer2.png)
+   
+
 
    
 
