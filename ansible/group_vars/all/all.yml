@@ -1,19 +1,15 @@
 ---
 ansible_user: ansible
 
-# Zabbix Server
+# Zabbix 
 zabbix_version: "7.0"
 zabbix_server_dbhost: "localhost"
-zabbix_server_dbname: "zabbix"
-zabbix_server_dbuser: "zabbix"
-zabbix_server_dbpassword: "zabbix"
-zabbix_server_dbtype: "postgresql"
 zabbix_server_dbport: 5432
 zabbix_server_database_creation: false
 zabbix_server_manage_database: false
 zabbix_server_database_sqlload: false
 
-# PostgreSQL connection settings
+# PostgreSQL
 zabbix_server_pgsql_login_user: "postgres"
 zabbix_server_pgsql_login_unix_socket: "/var/run/postgresql"
 
