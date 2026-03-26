@@ -16,7 +16,14 @@
 
    ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/terraform.png)
 
+   Созданные виртуальные машины, сети, балансировщик, группы безопасности и т.д. в консоле яндекс
+
+   ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/yandexcloud.png)
    
+   Тут видно, что все ВМ работают
+
+   ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/yandexcloud2.png)
+
 
 ### ansible
 
