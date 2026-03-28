@@ -20,9 +20,9 @@
 
    ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/yandexcloud.png)
    
-   Тут видно, что все ВМ работают. По какой-то причине все ВМ создаются у меня, как прерываемые, хотя данная строка в файле vm.tf у меня отсутствует. Поэтому все актуальные IP для проверки работоспособности сервисов находятся в /ansible/hosts
+   Тут видно, что все ВМ работают. Все актуальные IP адреса для сервисов видно на этом скриншоте
 
-   ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/yandexcloud2.png)
+   ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/yandexcloud3.png)
 
 
 ### ansible
