@@ -20,7 +20,7 @@
 
    ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/yandexcloud.png)
    
-   Тут видно, что все ВМ работают. Все актуальные IP адреса для сервисов видно на этом скриншоте
+   Тут видно, что все ВМ работают. Все актуальные IP адреса для сервисов видно на этом скриншоте, а также актуальные в файле IP address VM
 
    ![1](https://github.com/Tolstevich/netology_diplom/blob/master/img/yandexcloud3.png)
 
